@@ -261,7 +261,7 @@
     font-weight:400;
     font-size:.75rem;
     line-height:1.6;
-    color:var(--ink-faint);
+    color:#000;
     max-width:52ch;
     text-align:center;
   }
@@ -397,7 +397,7 @@
   .tile-img{
     position:absolute; inset:0;
     background-size:cover; background-position:center;
-    filter:grayscale(45%) contrast(1.05) brightness(.88);
+    filter:contrast(1.05);
     transition:filter .5s ease, transform .5s ease;
   }
   .tile-img.photo-thumb{
@@ -407,7 +407,7 @@
   }
   .tile:hover{ z-index:30; }
   .tile:hover .tile-img{
-    filter:grayscale(0%) contrast(1.1) brightness(1.02);
+    filter:contrast(1.1) brightness(1.02);
     animation:thumb-drift 5s ease-in-out infinite alternate;
   }
   @keyframes thumb-drift{
