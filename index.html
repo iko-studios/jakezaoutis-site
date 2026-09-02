@@ -270,48 +270,23 @@
   .cd-player{
     display:flex;
     align-items:center;
-    gap:1.4rem;
-    max-width:600px;
+    gap:1rem;
+    max-width:380px;
     margin:1.8rem auto 3.5rem;
-    padding:1.1rem 1.4rem;
+    padding:.8rem 1rem;
     border:1px solid var(--line);
     border-radius:12px;
     background:var(--bg);
   }
-  .cd-disc{
-    position:relative;
-    flex:0 0 auto;
-    width:78px; height:78px;
-    border-radius:50%;
-    background:
-      repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,.16) 0 1px, transparent 1px 6px),
-      conic-gradient(from 0deg, #1c1c1c, #3d3d3d, #171717 55%, #2b2b2b, #1c1c1c);
-    box-shadow:inset 0 0 0 1px rgba(0,0,0,.25), 0 2px 8px rgba(0,0,0,.2);
-    animation:cdSpin 7s linear infinite;
-  }
-  .cd-disc::before{
-    content:"";
-    position:absolute; inset:32%;
-    border-radius:50%;
-    background:var(--blue);
-    opacity:.88;
-  }
-  .cd-disc-hole{
-    position:absolute; inset:0; margin:auto;
-    width:7px; height:7px;
-    border-radius:50%;
-    background:var(--bg);
-  }
-  @keyframes cdSpin{ to{ transform:rotate(360deg); } }
   .cd-info{ flex:1 1 auto; min-width:0; text-align:left; }
   .cd-eyebrow{
     display:block;
     font-family:'Space Mono', monospace;
-    font-size:.66rem;
+    font-size:.6rem;
     letter-spacing:.14em;
     text-transform:uppercase;
     color:var(--ink-dim);
-    margin-bottom:.55rem;
+    margin-bottom:.4rem;
   }
   .cd-embed{ line-height:0; }
   .cd-fallback{
@@ -350,7 +325,7 @@
   }
   .cd-open-link:hover{ color:var(--blue); }
   @media (max-width:600px){
-    .cd-player{ flex-direction:column; text-align:center; padding:1.4rem; }
+    .cd-player{ flex-direction:column; text-align:center; padding:1rem; }
     .cd-info{ text-align:center; }
   }
 
@@ -643,43 +618,43 @@
   <div class="tile-grid" id="grid">
     <div class="tile" data-genre="Photography" data-medium="photo" data-client="Mills" data-images="assets/work/mills/01.jpg,assets/work/mills/02.jpg,assets/work/mills/03.jpg,assets/work/mills/04.jpg,assets/work/mills/05.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#241f16,#0c0b09);"></div>
-      <div class="tile-num">34</div>
+      <div class="tile-num">01</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Mills — Studio, BTS</div>
+        <div class="tile-title">Mills</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-client="Yung Bans" data-images="assets/work/yung-bans-4got10/01.jpg,assets/work/yung-bans-4got10/02.jpg,assets/work/yung-bans-4got10/03.jpg,assets/work/yung-bans-4got10/04.jpg,assets/work/yung-bans-4got10/05.jpg,assets/work/yung-bans-4got10/06.jpg,assets/work/yung-bans-4got10/07.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#1e2b3a,#0c0b09);"></div>
-      <div class="tile-num">33</div>
+      <div class="tile-num">02</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Yung Bans — 4GOT10 Magazine</div>
+        <div class="tile-title">Yung Bans</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-client="Ekkstacy" data-images="assets/work/ekkstacy/01.jpg,assets/work/ekkstacy/02.jpg,assets/work/ekkstacy/03.jpg,assets/work/ekkstacy/04.jpg,assets/work/ekkstacy/05.jpg,assets/work/ekkstacy/06.jpg,assets/work/ekkstacy/07.jpg,assets/work/ekkstacy/08.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#182028,#0c0b09);"></div>
-      <div class="tile-num">32</div>
+      <div class="tile-num">03</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Ekkstacy — Tour Photographer</div>
+        <div class="tile-title">Ekkstacy</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2024" data-client="Noga Erez" data-images="assets/work/noga-erez/01.jpg,assets/work/noga-erez/02.jpg,assets/work/noga-erez/03.jpg,assets/work/noga-erez/04.jpg,assets/work/noga-erez/05.jpg,assets/work/noga-erez/06.jpg,assets/work/noga-erez/07.jpg,assets/work/noga-erez/08.jpg,assets/work/noga-erez/09.jpg,assets/work/noga-erez/10.jpg,assets/work/noga-erez/11.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#2a2620,#0c0b09);"></div>
-      <div class="tile-num">31</div>
+      <div class="tile-num">04</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Noga Erez — Magazine Shoot BTS</div>
+        <div class="tile-title">Noga Erez</div>
         <div class="tile-meta"><span>BTS Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Producing" data-medium="video" data-year="2023" data-client="Claire Rosinkranz" data-embed-url="https://f.io/HFl_2xCR">
       <div class="tile-img" style="background:linear-gradient(160deg,#3a2f19,#0c0b09);"></div>
-      <div class="tile-num">30</div>
+      <div class="tile-num">01</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Claire Rosinkranz — 'Dancer' Live</div>
@@ -688,7 +663,7 @@
     </div>
     <div class="tile" data-genre="Producing" data-medium="video" data-year="2024" data-client="Vansire" data-embed-url="https://www.youtube.com/embed/GbRq4Jw8slA?start=713">
       <div class="tile-img" style="background:linear-gradient(160deg,#28331f,#0c0b09);"></div>
-      <div class="tile-num">29</div>
+      <div class="tile-num">02</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Vansire — Rummer House Sessions</div>
@@ -697,16 +672,16 @@
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2025" data-client="Bon Iver" data-images="assets/work/bon-iver-x-jim-e-stack/01.jpg,assets/work/bon-iver-x-jim-e-stack/02.jpg,assets/work/bon-iver-x-jim-e-stack/03.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#332a1a,#0c0b09);"></div>
-      <div class="tile-num">28</div>
+      <div class="tile-num">05</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Bon Iver &amp; Jim-E Stack — Press Photos</div>
+        <div class="tile-title">Bon Iver &amp; Jim-E Stack</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Creative Direction" data-medium="video" data-year="2024" data-client="Jahson Paynter" data-embed-url="https://www.youtube.com/embed/Mdt1ghMUQI0">
       <div class="tile-img" style="background:linear-gradient(160deg,#22201c,#0c0b09);"></div>
-      <div class="tile-num">27</div>
+      <div class="tile-num">03</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Jahson Paynter — Maple Brown, Official Music Video</div>
@@ -715,25 +690,25 @@
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2025" data-client="Hey, Nothing" data-images="assets/work/hey-nothing-press/01.jpg,assets/work/hey-nothing-press/02.jpg,assets/work/hey-nothing-press/03.jpg,assets/work/hey-nothing-press/04.jpg,assets/work/hey-nothing-press/05.jpg,assets/work/hey-nothing-press/06.jpg,assets/work/hey-nothing-press/07.jpg,assets/work/hey-nothing-press/08.jpg,assets/work/hey-nothing-press/09.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#293221,#0c0b09);"></div>
-      <div class="tile-num">26</div>
+      <div class="tile-num">06</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Hey, Nothing — 2025 Press Photos</div>
+        <div class="tile-title">Hey, Nothing</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2024" data-client="Hey, Nothing" data-images="assets/work/hey-nothing-tour/01.jpg,assets/work/hey-nothing-tour/02.jpg,assets/work/hey-nothing-tour/03.jpg,assets/work/hey-nothing-tour/04.jpg,assets/work/hey-nothing-tour/05.jpg,assets/work/hey-nothing-tour/06.jpg,assets/work/hey-nothing-tour/07.jpg,assets/work/hey-nothing-tour/08.jpg,assets/work/hey-nothing-tour/09.jpg,assets/work/hey-nothing-tour/10.jpg,assets/work/hey-nothing-tour/11.jpg,assets/work/hey-nothing-tour/12.jpg,assets/work/hey-nothing-tour/13.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#1c1c1c,#0c0b09);"></div>
-      <div class="tile-num">25</div>
+      <div class="tile-num">07</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Hey, Nothing — Tour Photographer</div>
+        <div class="tile-title">Hey, Nothing</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2025" data-client="Director's Reel" data-embed-url="https://f.io/i8qZH371">
       <div class="tile-img" style="background:linear-gradient(160deg,#293321,#0c0b09);"></div>
-      <div class="tile-num">24</div>
+      <div class="tile-num">04</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Directors Reel 2025</div>
@@ -742,16 +717,16 @@
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2023" data-client="Rich Amiri" data-images="assets/work/rich-amiri/01.jpg,assets/work/rich-amiri/02.jpg,assets/work/rich-amiri/03.jpg,assets/work/rich-amiri/04.jpg,assets/work/rich-amiri/05.jpg,assets/work/rich-amiri/06.jpg,assets/work/rich-amiri/07.jpg,assets/work/rich-amiri/08.jpg,assets/work/rich-amiri/09.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#3f2418,#0c0b09);"></div>
-      <div class="tile-num">23</div>
+      <div class="tile-num">08</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Rich Amiri — 4GOT10 Magazine</div>
+        <div class="tile-title">Rich Amiri</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2024" data-client="Depop" data-embed-url="https://f.io/DLytq17b">
       <div class="tile-img" style="background:linear-gradient(160deg,#332818,#0c0b09);"></div>
-      <div class="tile-num">22</div>
+      <div class="tile-num">05</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Depop — Any Wear, Anywhere</div>
@@ -760,7 +735,7 @@
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2023" data-client="Oble Reed" data-embed-url="https://www.youtube.com/embed/ee-Ymy_nh1w">
       <div class="tile-img" style="background:linear-gradient(160deg,#2c2c2c,#0c0b09);"></div>
-      <div class="tile-num">21</div>
+      <div class="tile-num">06</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Oble Reed ft. Femdot — Aim-Hi, Official Music Video</div>
@@ -769,16 +744,16 @@
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2025" data-client="070 Shake" data-images="assets/work/070-shake/01.jpg,assets/work/070-shake/02.jpg,assets/work/070-shake/03.jpg,assets/work/070-shake/04.jpg,assets/work/070-shake/05.jpg,assets/work/070-shake/06.jpg,assets/work/070-shake/07.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#1a1a1a,#0c0b09);"></div>
-      <div class="tile-num">20</div>
+      <div class="tile-num">09</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">070 Shake — Vagabond, Music Video BTS</div>
+        <div class="tile-title">070 Shake</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2024" data-client="Elmiene" data-embed-url="https://www.youtube.com/embed/sdULaDPRtzQ">
       <div class="tile-img" style="background:linear-gradient(160deg,#2e2418,#0c0b09);"></div>
-      <div class="tile-num">19</div>
+      <div class="tile-num">07</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Elmiene — 'Anyways', Live from The Belasco</div>
@@ -787,7 +762,7 @@
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2024" data-client="Belaganas" data-embed-url="https://www.youtube.com/embed/dooeJ9v6OyI">
       <div class="tile-img" style="background:linear-gradient(160deg,#1c2a2e,#0c0b09);"></div>
-      <div class="tile-num">18</div>
+      <div class="tile-num">08</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Belaganas — Uh Oh, Official Music Video</div>
@@ -796,7 +771,7 @@
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2024" data-client="Mills" data-embed-url="https://www.youtube.com/embed/vs3wQ8dgYiw">
       <div class="tile-img" style="background:linear-gradient(160deg,#2a1c2e,#0c0b09);"></div>
-      <div class="tile-num">17</div>
+      <div class="tile-num">09</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Mills — Sex on Fire, Live Session</div>
@@ -805,7 +780,7 @@
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2024" data-client="Mills" data-embed-url="https://www.youtube.com/embed/H0mQ7J7hI1Q">
       <div class="tile-img" style="background:linear-gradient(160deg,#242e1c,#0c0b09);"></div>
-      <div class="tile-num">16</div>
+      <div class="tile-num">10</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Mills — Hands on Me, Official Music Video</div>
@@ -814,7 +789,7 @@
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2024" data-client="Mills" data-embed-url="https://www.youtube.com/embed/s09vTq_JSTs">
       <div class="tile-img" style="background:linear-gradient(160deg,#2e1c1c,#0c0b09);"></div>
-      <div class="tile-num">15</div>
+      <div class="tile-num">11</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Mills — On the Weekend, Official Music Video</div>
@@ -823,7 +798,7 @@
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2024" data-client="Sally Boy" data-embed-url="https://www.youtube.com/embed/TS4ArPCyJwM">
       <div class="tile-img" style="background:linear-gradient(160deg,#1c2e28,#0c0b09);"></div>
-      <div class="tile-num">14</div>
+      <div class="tile-num">12</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Sally Boy — True American, Official Music Video</div>
@@ -841,7 +816,7 @@
     </div>
     <div class="tile" data-genre="Creative Direction" data-medium="video" data-year="2024" data-client="Kyle Lux" data-embed-url="https://www.youtube.com/embed/yQOfb_K--GY">
       <div class="tile-img" style="background:linear-gradient(160deg,#1c1c2e,#0c0b09);"></div>
-      <div class="tile-num">12</div>
+      <div class="tile-num">14</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Kyle Lux — Cascade / Nebula, Official Visualizer</div>
@@ -850,7 +825,7 @@
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2024" data-client="Earl Hondo" data-embed-url="https://www.youtube.com/embed/O_Nrb2B8bDM">
       <div class="tile-img" style="background:linear-gradient(160deg,#2e2818,#0c0b09);"></div>
-      <div class="tile-num">11</div>
+      <div class="tile-num">15</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Earl Hondo ft. Frsh Waters — Back Outside, Official Music Video</div>
@@ -859,7 +834,7 @@
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2024" data-client="Mild Child" data-embed-url="https://www.youtube.com/embed/baDa6scnMPc">
       <div class="tile-img" style="background:linear-gradient(160deg,#1c2e1c,#0c0b09);"></div>
-      <div class="tile-num">10</div>
+      <div class="tile-num">16</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Mild Child — Colors, Official Music Video</div>
@@ -868,7 +843,7 @@
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2024" data-client="Mild Child" data-embed-url="https://www.youtube.com/embed/G0X-RyjWM1g">
       <div class="tile-img" style="background:linear-gradient(160deg,#2e1c28,#0c0b09);"></div>
-      <div class="tile-num">09</div>
+      <div class="tile-num">17</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Mild Child — Joonis Gloomis, Live Session</div>
@@ -877,7 +852,7 @@
     </div>
     <div class="tile" data-genre="Directing" data-medium="video" data-year="2024" data-client="Bon Iver" data-embed-url="https://www.youtube.com/embed/3i7UGVruJNw?start=38">
       <div class="tile-img" style="background:linear-gradient(160deg,#1c2422,#0c0b09);"></div>
-      <div class="tile-num">08</div>
+      <div class="tile-num">18</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Bon Iver — SABLE, fABLE DVD Commentary</div>
@@ -886,61 +861,61 @@
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2024" data-client="Mumford &amp; Sons" data-images="assets/work/mumford-and-sons/01.jpg,assets/work/mumford-and-sons/02.jpg,assets/work/mumford-and-sons/03.jpg,assets/work/mumford-and-sons/04.jpg,assets/work/mumford-and-sons/05.jpg,assets/work/mumford-and-sons/06.jpg,assets/work/mumford-and-sons/07.jpg,assets/work/mumford-and-sons/08.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#2a2420,#0c0b09);"></div>
-      <div class="tile-num">07</div>
+      <div class="tile-num">10</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Mumford &amp; Sons — Songline Sessions</div>
+        <div class="tile-title">Mumford &amp; Sons</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2024" data-client="Evenson" data-images="assets/work/evenson/01.jpg,assets/work/evenson/02.jpg,assets/work/evenson/03.jpg,assets/work/evenson/04.jpg,assets/work/evenson/05.jpg,assets/work/evenson/06.jpg,assets/work/evenson/07.jpg,assets/work/evenson/08.jpg,assets/work/evenson/09.jpg,assets/work/evenson/10.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#241f18,#0c0b09);"></div>
-      <div class="tile-num">06</div>
+      <div class="tile-num">11</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Evenson — Studio Film Portraits</div>
+        <div class="tile-title">Evenson</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2024" data-client="Waylon Wyatt" data-images="assets/work/waylon-wyatt/01.jpg,assets/work/waylon-wyatt/02.jpg,assets/work/waylon-wyatt/03.jpg,assets/work/waylon-wyatt/04.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#2c2416,#0c0b09);"></div>
-      <div class="tile-num">05</div>
+      <div class="tile-num">12</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Waylon Wyatt — Arkansas Press Photos</div>
+        <div class="tile-title">Waylon Wyatt</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2024" data-client="Sekou" data-images="assets/work/sekou/01.jpg,assets/work/sekou/02.jpg,assets/work/sekou/03.jpg,assets/work/sekou/04.jpg,assets/work/sekou/05.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#26201c,#0c0b09);"></div>
-      <div class="tile-num">04</div>
+      <div class="tile-num">13</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Sekou — Portraits &amp; BTS</div>
+        <div class="tile-title">Sekou</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2024" data-client="Ikaria" data-images="assets/work/ikaria/01.jpg,assets/work/ikaria/02.jpg,assets/work/ikaria/03.jpg,assets/work/ikaria/04.jpg,assets/work/ikaria/05.jpg,assets/work/ikaria/06.jpg,assets/work/ikaria/07.jpg,assets/work/ikaria/08.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#20281c,#0c0b09);"></div>
-      <div class="tile-num">03</div>
+      <div class="tile-num">14</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Ikaria — Portraits</div>
+        <div class="tile-title">Ikaria</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2024" data-client="Alexsucks" data-images="assets/work/alexsucks/01.jpg,assets/work/alexsucks/02.jpg,assets/work/alexsucks/03.jpg,assets/work/alexsucks/04.jpg,assets/work/alexsucks/05.jpg,assets/work/alexsucks/06.jpg,assets/work/alexsucks/07.jpg,assets/work/alexsucks/08.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#1c1c22,#0c0b09);"></div>
-      <div class="tile-num">02</div>
+      <div class="tile-num">15</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
-        <div class="tile-title">Alexsucks — Live at Brooklyn</div>
+        <div class="tile-title">Alexsucks</div>
         <div class="tile-meta"><span>Photographer</span></div>
       </div>
     </div>
     <div class="tile" data-genre="Photography" data-medium="photo" data-year="2024" data-client="Hablot Brown" data-images="assets/work/hablot-brown/01.jpg,assets/work/hablot-brown/02.jpg,assets/work/hablot-brown/03.jpg,assets/work/hablot-brown/04.jpg,assets/work/hablot-brown/05.jpg,assets/work/hablot-brown/06.jpg,assets/work/hablot-brown/07.jpg,assets/work/hablot-brown/08.jpg,assets/work/hablot-brown/09.jpg">
       <div class="tile-img" style="background:linear-gradient(160deg,#241c22,#0c0b09);"></div>
-      <div class="tile-num">01</div>
+      <div class="tile-num">16</div>
       <div class="play-tag"><span class="dot"></span>Playing</div>
       <div class="tile-info">
         <div class="tile-title">Hablot Brown</div>
@@ -951,7 +926,6 @@
   <div class="index-credit">Jake Zaoutis is a filmmaker and photographer working across music, fashion, brand, and documentary. He lives in New York and works anywhere.</div>
   <!-- Monthly playlist CD player — update MONTHLY_PLAYLIST_URL in the script at the bottom of the page each month -->
   <div class="cd-player" aria-label="This month's playlist">
-    <div class="cd-disc" aria-hidden="true"><div class="cd-disc-hole"></div></div>
     <div class="cd-info">
       <span class="cd-eyebrow">Jake's Monthly Sounds</span>
       <div class="cd-embed">
