@@ -426,7 +426,7 @@
     transition:filter .5s ease, transform .5s ease;
   }
   .tile-img.photo-thumb{
-    background-size:contain;
+    background-size:cover;
     background-repeat:no-repeat;
     background-position:center;
   }
@@ -1139,7 +1139,7 @@
     if (youTubeId){
       imgEl.classList.add('photo-thumb');
       imgEl.style.backgroundImage = `url("${youTubeThumbUrl(youTubeId)}")`;
-      imgEl.style.backgroundSize = 'contain';
+      imgEl.style.backgroundSize = 'cover';
       imgEl.style.backgroundRepeat = 'no-repeat';
       imgEl.style.backgroundPosition = 'center';
     }
@@ -1175,7 +1175,7 @@
     if (!images.length) return;
     imgEl.classList.add('photo-thumb');
     imgEl.style.backgroundImage = `url("${images[0]}")`;
-    imgEl.style.backgroundSize = 'contain';
+    imgEl.style.backgroundSize = 'cover';
     imgEl.style.backgroundRepeat = 'no-repeat';
     imgEl.style.backgroundPosition = 'center';
     let scrollTimer = null;
