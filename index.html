@@ -1139,6 +1139,9 @@
     if (youTubeId){
       imgEl.classList.add('photo-thumb');
       imgEl.style.backgroundImage = `url("${youTubeThumbUrl(youTubeId)}")`;
+      imgEl.style.backgroundSize = 'contain';
+      imgEl.style.backgroundRepeat = 'no-repeat';
+      imgEl.style.backgroundPosition = 'center';
     }
 
     if (localPreview){
@@ -1172,6 +1175,9 @@
     if (!images.length) return;
     imgEl.classList.add('photo-thumb');
     imgEl.style.backgroundImage = `url("${images[0]}")`;
+    imgEl.style.backgroundSize = 'contain';
+    imgEl.style.backgroundRepeat = 'no-repeat';
+    imgEl.style.backgroundPosition = 'center';
     let scrollTimer = null;
     let step = 0;
 
