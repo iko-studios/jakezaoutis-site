@@ -267,68 +267,140 @@
   }
 
   /* ============ MONTHLY PLAYLIST CD PLAYER ============ */
+  /* Custom-styled player. Audio comes from a hidden Spotify embed,
+     driven through Spotify's iFrame API — nothing is self-hosted. */
   .cd-player{
-    display:flex;
-    align-items:center;
-    gap:1rem;
-    max-width:380px;
+    max-width:420px;
     margin:1.8rem auto 3.5rem;
-    padding:.8rem 1rem;
+    padding:1rem 1.1rem .9rem;
     border:1px solid var(--line);
     border-radius:12px;
     background:var(--bg);
+    font-family:'Space Mono', monospace;
+    text-align:left;
   }
-  .cd-info{ flex:1 1 auto; min-width:0; text-align:left; }
   .cd-eyebrow{
     display:block;
-    font-family:'Space Mono', monospace;
     font-size:.6rem;
     letter-spacing:.14em;
     text-transform:uppercase;
     color:var(--ink-dim);
-    margin-bottom:.4rem;
+    margin-bottom:.8rem;
   }
-  .cd-embed{ line-height:0; }
-  .cd-fallback{
-    line-height:1.6;
-    padding:1rem 1.1rem;
-    border:1px dashed var(--line);
-    border-radius:8px;
-    background:var(--bg-alt);
+  .cd-main{ display:flex; align-items:center; gap:1.1rem; }
+
+  /* the disc */
+  .cd-disc{
+    position:relative;
+    flex:0 0 auto;
+    width:96px; height:96px;
+    border-radius:50%;
+    background:#ddd center/cover no-repeat;
+    box-shadow:0 1px 0 rgba(0,0,0,.04), 0 6px 18px rgba(0,0,0,.12);
+    animation:cdSpin 3.2s linear infinite;
+    animation-play-state:paused;
   }
-  .cd-fallback p{
-    font-family:'Space Mono', monospace;
-    font-size:.68rem;
-    color:var(--ink-dim);
-    margin-bottom:.75rem;
+  .cd-disc::before{ /* iridescent sheen + grooves */
+    content:""; position:absolute; inset:0; border-radius:50%;
+    background:
+      repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 0 2px, rgba(255,255,255,.07) 2px 3px),
+      conic-gradient(from 30deg, rgba(255,255,255,.28), rgba(255,255,255,0) 18%, rgba(255,255,255,.22) 36%, rgba(255,255,255,0) 55%, rgba(255,255,255,.25) 75%, rgba(255,255,255,0) 90%);
+    mix-blend-mode:screen;
   }
-  .cd-fallback-btn{
-    display:inline-block;
-    font-family:'Space Mono', monospace;
-    font-size:.68rem;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:#fff;
-    background:var(--blue);
-    padding:.55rem 1rem;
-    border-radius:6px;
+  .cd-disc::after{ /* centre hub + hole */
+    content:""; position:absolute; left:50%; top:50%;
+    width:30px; height:30px; margin:-15px 0 0 -15px;
+    border-radius:50%;
+    background:radial-gradient(circle, var(--bg) 0 5px, rgba(0,0,0,.18) 5px 6px, rgba(240,240,240,.92) 6px 14px, rgba(0,0,0,.12) 14px 15px);
   }
-  .cd-fallback-btn:hover{ opacity:.85; }
-  .cd-open-link{
-    display:inline-block;
-    margin-top:.55rem;
-    font-family:'Space Mono', monospace;
-    font-size:.66rem;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--ink-dim);
+  .cd-player.is-playing .cd-disc{ animation-play-state:running; }
+  @keyframes cdSpin{ to{ transform:rotate(360deg); } }
+
+  .cd-now{ flex:1 1 auto; min-width:0; }
+  .cd-title{
+    font-size:.78rem; font-weight:700; color:var(--ink);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
-  .cd-open-link:hover{ color:var(--blue); }
-  @media (max-width:600px){
-    .cd-player{ flex-direction:column; text-align:center; padding:1rem; }
-    .cd-info{ text-align:center; }
+  .cd-artist{
+    font-size:.66rem; color:var(--ink-dim); margin-top:.15rem;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
 
+  .cd-progress{ display:flex; align-items:center; gap:.5rem; margin-top:.65rem; }
+  .cd-time{ font-size:.58rem; color:var(--ink-faint); min-width:2.6em; font-variant-numeric:tabular-nums; }
+  .cd-time:last-child{ text-align:right; }
+  .cd-bar{
+    position:relative; flex:1 1 auto; height:14px; cursor:pointer;
+  }
+  .cd-bar::before{
+    content:""; position:absolute; left:0; right:0; top:6px; height:2px; background:var(--line);
+  }
+  .cd-bar-fill{
+    position:absolute; left:0; top:6px; height:2px; width:0; background:var(--blue);
+  }
+
+  .cd-controls{ display:flex; align-items:center; gap:.35rem; margin-top:.35rem; }
+  .cd-btn{
+    appearance:none; border:0; background:none; cursor:pointer;
+    color:var(--ink); width:30px; height:30px; border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    transition:background .15s ease, color .15s ease;
+  }
+  .cd-btn:hover{ background:var(--bg-alt); color:var(--blue); }
+  .cd-btn:focus-visible{ outline:1px solid var(--blue); outline-offset:2px; }
+  .cd-btn svg{ width:14px; height:14px; fill:currentColor; }
+  .cd-btn.cd-play{ width:36px; height:36px; background:var(--ink); color:#fff; }
+  .cd-btn.cd-play:hover{ background:var(--blue); color:#fff; }
+  .cd-btn.cd-play svg{ width:15px; height:15px; }
+  .cd-btn .i-pause{ display:none; }
+  .cd-player.is-playing .cd-btn .i-play{ display:none; }
+  .cd-player.is-playing .cd-btn .i-pause{ display:block; }
+  .cd-player.is-loading .cd-btn.cd-play{ opacity:.55; }
+
+  .cd-foot{
+    display:flex; justify-content:space-between; align-items:center; gap:.8rem;
+    margin-top:.8rem; padding-top:.65rem; border-top:1px solid var(--line-soft);
+  }
+  .cd-toggle, .cd-open-link{
+    appearance:none; border:0; background:none; cursor:pointer; padding:0;
+    font-family:'Space Mono', monospace;
+    font-size:.6rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+  .cd-toggle:hover, .cd-open-link:hover{ color:var(--blue); }
+
+  .cd-tracklist{ list-style:none; margin-top:.55rem; }
+  .cd-tracklist[hidden]{ display:none; }
+  .cd-track{
+    display:flex; gap:.7rem; align-items:baseline; width:100%;
+    appearance:none; border:0; background:none; cursor:pointer; text-align:left;
+    font-family:'Space Mono', monospace; font-size:.64rem; color:var(--ink);
+    padding:.32rem .35rem; border-radius:4px;
+  }
+  .cd-track:hover{ background:var(--bg-alt); }
+  .cd-track .n{ color:var(--ink-faint); min-width:1.4em; }
+  .cd-track .t{ flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .cd-track .t span{ color:var(--ink-dim); }
+  .cd-track .d{ color:var(--ink-faint); font-variant-numeric:tabular-nums; }
+  .cd-track.is-current{ color:var(--blue); }
+  .cd-track.is-current .n{ color:var(--blue); }
+
+  .cd-note{ font-size:.56rem; color:var(--ink-faint); margin-top:.5rem; line-height:1.5; }
+  .cd-note[hidden]{ display:none; }
+
+  /* hidden engine: the real Spotify embed that actually plays the audio */
+  .cd-engine{
+    position:absolute; width:1px; height:1px; overflow:hidden;
+    left:-9999px; top:auto; opacity:0; pointer-events:none;
+  }
+
+  @media (max-width:600px){
+    .cd-player{ margin-left:1rem; margin-right:1rem; }
+    .cd-disc{ width:80px; height:80px; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .cd-disc{ animation:none; }
+  }
 
   .section{ padding:clamp(4rem,10vw,7rem) clamp(1.2rem, 4vw, 3rem); }
   .section-head{
@@ -933,19 +1005,33 @@
     </div>
   </div>
   <div class="index-credit">Jake Zaoutis is a filmmaker and photographer working across music, fashion, brand, and documentary. He lives in New York and works anywhere.</div>
-  <!-- Monthly playlist CD player — update MONTHLY_PLAYLIST_URL in the script at the bottom of the page each month -->
-  <div class="cd-player" aria-label="This month's playlist">
-    <div class="cd-info">
-      <span class="cd-eyebrow">Jake's Monthly Sounds</span>
-      <div class="cd-embed">
-        <iframe id="cdSpotifyEmbed" style="border-radius:8px" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Monthly playlist"></iframe>
-        <div class="cd-fallback" id="cdFallback" hidden>
-          <p>Playback preview isn't available when this page is opened as a local file — Spotify blocks embeds outside a real web address. Once the site is live online, the player above will work normally.</p>
-          <a class="cd-fallback-btn" id="cdFallbackLink" href="#" target="_blank" rel="noopener">▶ Play this month's playlist on Spotify</a>
+  <!-- Monthly playlist CD player — update MONTHLY_PLAYLIST in the script at the bottom of the page each month -->
+  <div class="cd-player is-loading" id="cdPlayer" aria-label="This month's playlist">
+    <span class="cd-eyebrow" id="cdEyebrow">Jake's Monthly Sounds</span>
+    <div class="cd-main">
+      <div class="cd-disc" id="cdDisc" aria-hidden="true"></div>
+      <div class="cd-now">
+        <div class="cd-title" id="cdTitle">&nbsp;</div>
+        <div class="cd-artist" id="cdArtist">&nbsp;</div>
+        <div class="cd-progress">
+          <span class="cd-time" id="cdPos">0:00</span>
+          <div class="cd-bar" id="cdBar" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="cd-bar-fill" id="cdFill"></div></div>
+          <span class="cd-time" id="cdDur">0:00</span>
+        </div>
+        <div class="cd-controls">
+          <button class="cd-btn" id="cdPrev" type="button" aria-label="Previous track"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+          <button class="cd-btn cd-play" id="cdPlay" type="button" aria-label="Play"><svg class="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15L20 12z"/></svg><svg class="i-pause" viewBox="0 0 24 24"><path d="M6 4.5h4.2v15H6zM13.8 4.5H18v15h-4.2z"/></svg></button>
+          <button class="cd-btn" id="cdNext" type="button" aria-label="Next track"><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
         </div>
       </div>
+    </div>
+    <p class="cd-note" id="cdNote" hidden>Playing 30-second previews — log in to Spotify in this browser to hear full songs.</p>
+    <div class="cd-foot">
+      <button class="cd-toggle" id="cdToggle" type="button" aria-expanded="false" aria-controls="cdTracklist">Tracklist +</button>
       <a class="cd-open-link" id="cdOpenLink" href="#" target="_blank" rel="noopener">Open in Spotify ↗</a>
     </div>
+    <ol class="cd-tracklist" id="cdTracklist" hidden></ol>
+    <div class="cd-engine" aria-hidden="true"><div id="cdSpotifyEngine"></div></div>
   </div>
 </section>
 </div>
@@ -981,40 +1067,173 @@
 
 <script>
   // ============================================================
-  // MONTHLY PLAYLIST — update this one link at the start of each
-  // month. Paste the full Spotify playlist share link here.
+  // MONTHLY PLAYLIST — update this block at the start of each month.
+  // (Claude can regenerate it from the Spotify playlist link.)
   // ============================================================
-  const MONTHLY_PLAYLIST_URL = "https://open.spotify.com/playlist/0Bg5iGHzPdFJO6clzxtwkf?si=7587128597504e08";
+  const MONTHLY_PLAYLIST = {
+    url: "https://open.spotify.com/playlist/0Bg5iGHzPdFJO6clzxtwkf?si=7587128597504e08",
+    name: "november v26",
+    cover: "https://mosaic.scdn.co/640/ab67616d00001e02881947e0aace2ea429e7304aab67616d00001e02ac9863afe0f9df4aa837db2fab67616d00001e02bcf95c8cb05579c715725f3cab67616d00001e02c4c4a5d82534d5e6b2ed349a",
+    tracks: [
+      { title: "Niǎo (Bonus Track)", artist: "Sonicbrat", uri: "spotify:track:3EgJA7dzLnjlo24m2pmKEV", ms: 320214 },
+      { title: "You got time and I got money - VVTZJ EDIT", artist: "Smerz, Clairo, VVTZJ", uri: "spotify:track:5mLchLWTDgVPJPOjmDoeAx", ms: 322625 },
+      { title: "The End of the World", artist: "Skeeter Davis", uri: "spotify:track:5DTOOkooKFUvWj1XQTFa09", ms: 157573 },
+      { title: "Anything", artist: "Phoebe Bridgers", uri: "spotify:track:3htz0sRGLYHbbAS9QeEqpy", ms: 215427 },
+      { title: "Pardon My French", artist: "glaive", uri: "spotify:track:2MCb6Q5SJMt5eeIlwjOZd1", ms: 191754 },
+      { title: "id treat u better", artist: "Junior Mesa", uri: "spotify:track:3Gc9pv0qFEZ7HSFPzfsxJe", ms: 248000 }
+    ]
+  };
   // ============================================================
 
+  // Custom CD player. The sound itself comes from Spotify: a hidden
+  // Spotify embed is controlled through Spotify's iFrame API, so nothing
+  // is downloaded or re-hosted. Visitors who aren't logged in to Spotify
+  // hear 30-second previews (Spotify's rule, not ours).
   (function setupMonthlyPlaylist(){
-    const idMatch = MONTHLY_PLAYLIST_URL.match(/playlist\/([a-zA-Z0-9]+)/);
-    const playlistId = idMatch ? idMatch[1] : null;
-    const embed = document.getElementById('cdSpotifyEmbed');
-    const openLink = document.getElementById('cdOpenLink');
-    const fallback = document.getElementById('cdFallback');
-    const fallbackLink = document.getElementById('cdFallbackLink');
+    const P = MONTHLY_PLAYLIST;
+    const $ = id => document.getElementById(id);
+    const player = $('cdPlayer');
+    if (!player || !P.tracks.length) return;
 
-    if (openLink){
-      openLink.href = MONTHLY_PLAYLIST_URL;
+    const els = {
+      disc: $('cdDisc'), title: $('cdTitle'), artist: $('cdArtist'),
+      pos: $('cdPos'), dur: $('cdDur'), bar: $('cdBar'), fill: $('cdFill'),
+      play: $('cdPlay'), prev: $('cdPrev'), next: $('cdNext'),
+      toggle: $('cdToggle'), list: $('cdTracklist'), open: $('cdOpenLink'),
+      note: $('cdNote'), eyebrow: $('cdEyebrow')
+    };
+
+    const fmt = ms => { const s = Math.max(0, Math.round(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+    const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+    els.open.href = P.url;
+    els.disc.style.backgroundImage = 'url("' + P.cover + '")';
+    els.eyebrow.textContent = "Jake's Monthly Sounds — " + P.name;
+
+    // tracklist
+    els.list.innerHTML = P.tracks.map((t, i) =>
+      '<li><button class="cd-track" type="button" data-i="' + i + '">' +
+      '<span class="n">' + String(i + 1).padStart(2, '0') + '</span>' +
+      '<span class="t">' + esc(t.title) + ' <span>— ' + esc(t.artist) + '</span></span>' +
+      '<span class="d">' + fmt(t.ms) + '</span></button></li>').join('');
+    els.toggle.addEventListener('click', () => {
+      const open = els.list.hidden;
+      els.list.hidden = !open;
+      els.toggle.setAttribute('aria-expanded', String(open));
+      els.toggle.textContent = open ? 'Tracklist −' : 'Tracklist +';
+    });
+
+    let index = 0, controller = null, playing = false, loadedIndex = -1;
+    let pendingPlay = false, duration = 0, position = 0, advancing = false;
+
+    function show(i){
+      const t = P.tracks[i];
+      els.title.textContent = t.title;
+      els.artist.textContent = t.artist;
+      duration = t.ms; position = 0;
+      paintProgress();
+      els.list.querySelectorAll('.cd-track').forEach(b => b.classList.toggle('is-current', +b.dataset.i === i));
     }
-    if (fallbackLink){
-      fallbackLink.href = MONTHLY_PLAYLIST_URL;
+    function paintProgress(){
+      const pct = duration ? Math.min(100, position / duration * 100) : 0;
+      els.fill.style.width = pct + '%';
+      els.bar.setAttribute('aria-valuenow', String(Math.round(pct)));
+      els.pos.textContent = fmt(position);
+      els.dur.textContent = fmt(duration);
+    }
+    function setPlaying(on){
+      playing = on;
+      player.classList.toggle('is-playing', on);
+      els.play.setAttribute('aria-label', on ? 'Pause' : 'Play');
     }
 
-    // Spotify's embed only renders when the page has a real http/https
-    // address. When this file is opened locally (file://) the browser's
-    // origin is "null" and Spotify blocks the iframe outright, so show a
-    // plain link instead of a broken embed box.
+    function playIndex(i){
+      index = (i + P.tracks.length) % P.tracks.length;
+      show(index);
+      if (!controller) { pendingPlay = true; return; }
+      if (loadedIndex !== index){
+        loadedIndex = index;
+        pendingPlay = true;
+        player.classList.add('is-loading');
+        controller.loadUri(P.tracks[index].uri);
+        // some browsers don't fire 'ready' again after loadUri
+        setTimeout(() => { if (pendingPlay){ pendingPlay = false; controller.play(); } }, 900);
+      } else {
+        controller.play();
+      }
+    }
+
+    els.play.addEventListener('click', () => {
+      if (!controller){ pendingPlay = true; return; }
+      if (loadedIndex !== index) return playIndex(index);
+      controller.togglePlay();
+    });
+    els.prev.addEventListener('click', () => {
+      if (position > 3000 && controller && loadedIndex === index){ controller.seek(0); return; }
+      playIndex(index - 1);
+    });
+    els.next.addEventListener('click', () => playIndex(index + 1));
+    els.list.addEventListener('click', e => {
+      const b = e.target.closest('.cd-track');
+      if (b) playIndex(+b.dataset.i);
+    });
+
+    function seekTo(frac){
+      if (!controller || loadedIndex !== index || !duration) return;
+      controller.seek(Math.max(0, Math.min(1, frac)) * duration / 1000);
+    }
+    els.bar.addEventListener('click', e => {
+      const r = els.bar.getBoundingClientRect();
+      seekTo((e.clientX - r.left) / r.width);
+    });
+    els.bar.addEventListener('keydown', e => {
+      if (!duration) return;
+      if (e.key === 'ArrowRight'){ e.preventDefault(); seekTo((position + 5000) / duration); }
+      if (e.key === 'ArrowLeft'){ e.preventDefault(); seekTo((position - 5000) / duration); }
+    });
+
+    show(0);
+
+    // Spotify blocks embeds on file:// pages — the buttons then just open Spotify.
     if (location.protocol === 'file:'){
-      if (embed) embed.style.display = 'none';
-      if (fallback) fallback.hidden = false;
+      player.classList.remove('is-loading');
+      els.play.addEventListener('click', () => window.open(P.url, '_blank', 'noopener'));
       return;
     }
 
-    if (playlistId && embed){
-      embed.src = 'https://open.spotify.com/embed/playlist/' + playlistId + '?utm_source=generator&theme=0';
-    }
+    window.onSpotifyIframeApiReady = (IFrameAPI) => {
+      IFrameAPI.createController($('cdSpotifyEngine'),
+        { uri: P.tracks[0].uri, width: 300, height: 80 },
+        (ctrl) => {
+          controller = ctrl;
+          loadedIndex = 0;
+          ctrl.addListener('ready', () => {
+            player.classList.remove('is-loading');
+            if (pendingPlay){ pendingPlay = false; ctrl.play(); }
+          });
+          ctrl.addListener('playback_update', e => {
+            const d = e.data || {};
+            player.classList.toggle('is-loading', !!d.isBuffering);
+            if (d.duration){ duration = d.duration; }
+            position = d.position || 0;
+            paintProgress();
+            // Spotify plays ~30s previews when the visitor isn't logged in
+            const t = P.tracks[index];
+            els.note.hidden = !(d.duration && d.duration < 31000 && t.ms > 40000);
+            setPlaying(!d.isPaused);
+            // auto-advance at the end of a track
+            if (d.isPaused && d.duration && d.position >= d.duration - 800 && !advancing){
+              advancing = true;
+              setTimeout(() => { advancing = false; }, 1500);
+              playIndex(index + 1);
+            }
+          });
+        });
+    };
+    const s = document.createElement('script');
+    s.src = 'https://open.spotify.com/embed/iframe-api/v1';
+    s.async = true;
+    document.body.appendChild(s);
   })();
 
   // Split hand-cut headline into individually wobbled letter spans
