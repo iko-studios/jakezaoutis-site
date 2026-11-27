@@ -389,9 +389,12 @@
   .cd-note[hidden]{ display:none; }
 
   /* hidden engine: the real Spotify embed that actually plays the audio */
+  /* (kept on-screen at real size but invisible: browsers pause
+     off-screen or 1px embeds, which stops the audio) */
+  .cd-player{ position:relative; }
   .cd-engine{
-    position:absolute; width:1px; height:1px; overflow:hidden;
-    left:-9999px; top:auto; opacity:0; pointer-events:none;
+    position:absolute; left:0; top:0; width:300px; height:80px;
+    opacity:.001; pointer-events:none; z-index:-1; overflow:hidden;
   }
 
   @media (max-width:600px){
@@ -1124,7 +1127,7 @@
     });
 
     let index = 0, controller = null, playing = false, loadedIndex = -1;
-    let pendingPlay = false, duration = 0, position = 0, advancing = false;
+    let pendingPlay = false, duration = 0, position = 0, advancing = false, lastUpdate = 0;
 
     function show(i){
       const t = P.tracks[i];
@@ -1192,6 +1195,13 @@
       if (e.key === 'ArrowLeft'){ e.preventDefault(); seekTo((position - 5000) / duration); }
     });
 
+    function advance(){
+      if (advancing) return;
+      advancing = true;
+      setTimeout(() => { advancing = false; }, 2500);
+      playIndex(index + 1);
+    }
+
     show(0);
 
     // Spotify blocks embeds on file:// pages — the buttons then just open Spotify.
@@ -1216,18 +1226,21 @@
             player.classList.toggle('is-loading', !!d.isBuffering);
             if (d.duration){ duration = d.duration; }
             position = d.position || 0;
+            lastUpdate = Date.now();
             paintProgress();
             // Spotify plays ~30s previews when the visitor isn't logged in
             const t = P.tracks[index];
             els.note.hidden = !(d.duration && d.duration < 31000 && t.ms > 40000);
             setPlaying(!d.isPaused);
             // auto-advance at the end of a track
-            if (d.isPaused && d.duration && d.position >= d.duration - 800 && !advancing){
-              advancing = true;
-              setTimeout(() => { advancing = false; }, 1500);
-              playIndex(index + 1);
-            }
+            if (d.isPaused && d.duration && d.position >= d.duration - 800) advance();
           });
+          // Spotify doesn't always send a final "ended" update, so also
+          // advance once the clock says the track must have finished.
+          setInterval(() => {
+            if (playing && lastUpdate && duration &&
+                position + (Date.now() - lastUpdate) > duration + 1500) advance();
+          }, 1000);
         });
     };
     const s = document.createElement('script');
